@@ -1,4 +1,5 @@
 <?php
+require_once'../vendor/autoload.php';
 // print_r(apache_get_modules());
 // echo "<pre>"; print_r($_SERVER); die;
 // $_SERVER["REQUEST_URI"] = str_replace("/phalt/","/",$_SERVER["REQUEST_URI"]);

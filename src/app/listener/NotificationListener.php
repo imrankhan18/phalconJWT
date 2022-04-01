@@ -42,7 +42,7 @@ class NotificationListener extends Injectable
 
                 if (true !== $acl->isAllowed($claims['sub'], "$controller", "$action")) {
                     echo "Access Denied";
-                    print_r($acl);
+                    // print_r($acl);
                     die();
                 }
             }
