@@ -13,6 +13,8 @@ class ComponentsController extends Controller{
     }
     public function compoAction()
     {
+        // print_r($_POST['components']);
+        // die;
         $components= new Components();
         $components->assign(
             $this->request->getPost(),

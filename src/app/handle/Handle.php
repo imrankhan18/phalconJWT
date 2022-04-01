@@ -20,6 +20,10 @@ class Handle extends Injectable
         // if ($order->zipcode == null) {
         //     $order->zipcode = $setting[0]->zipcode;
         // }
+
+        // print_r($setting);
+        // echo $setting[0]->title;
+        // die;
         if ($setting[0]->title == 'Tag') {
             $product->name = $product->name .''. $product->tags;
         } elseif ($setting[0]->title == 'WithoutTag') {
@@ -38,4 +42,3 @@ class Handle extends Injectable
 
       
 }
-

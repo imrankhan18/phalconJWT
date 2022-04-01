@@ -19,9 +19,7 @@ use Phalcon\Logger;
 use Phalcon\Events\Manager;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Logger\Adapter\Stream;
-
-
-
+use App\Locale\Locale;
 
 $config = new Config([]);
 
@@ -43,7 +41,8 @@ $loader->registerNamespaces(
     [
         
         'App\Handle'=> APP_PATH . "/handle",
-        'App\Listener'=> APP_PATH . "/listener"
+        'App\Listener'=> APP_PATH . "/listener",
+        'App\Locale'=> APP_PATH . "/locale"
     ]
 );
 
@@ -182,7 +181,7 @@ $container->set(
 
 
 
-$container = new Di();
+// $container = new Di();
 
 $container->set(
     'escaper',
@@ -206,7 +205,7 @@ $loader->registerNameSpaces(
 );
 $loader->register();
 
-$container = new Di();
+// $container = new Di();
 
 $container->set(
     'logger',
@@ -223,6 +222,7 @@ $container->set(
     }
 );
 
+$container->set('locale', (new Locale())->getTranslator());
 
 // $container->set(
 //     'mongo',
@@ -233,7 +233,6 @@ $container->set(
 //     },
 //     true
 // );
-
 try {
     // Handle the request
     $response = $application->handle(

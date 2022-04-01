@@ -8,7 +8,7 @@ class IndexController extends Controller
     public function indexAction()
     {
         
-        // $this->view->products = Products::find();
+        $this->view->products = Products::find();
         
         // return '<h1>Hello World!</h1>';
         

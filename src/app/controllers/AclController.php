@@ -1,5 +1,5 @@
 <?php
-
+use MyApp\Locale;
 use Phalcon\Mvc\Controller;
 use Phalcon\Acl\Adapter\Memory;
 use Phalcon\Acl\Role;
@@ -10,6 +10,9 @@ use Phalcon\Security\JWT\Token\Parser;
 use Phalcon\Security\JWT\Validator;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Phalcon\Translate\Adapter\NativeArray;
+use Phalcon\Translate\InterpolatorFactory;
+use Phalcon\Translate\TranslateFactory;
 
 class AclController extends Controller
 {
@@ -103,5 +106,10 @@ class AclController extends Controller
     //     echo $jwt;
     //     die();
          return $jwt;
+    }
+    public function langTranslateAction()
+    {
+          
+           
     }
 }

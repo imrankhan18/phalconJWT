@@ -9,7 +9,7 @@ class ProductController extends Controller{
 
     public function indexAction()
     {
-
+        // $this->view->product = Products::find();
     }
 
     public function registerAction()
@@ -32,8 +32,10 @@ class ProductController extends Controller{
                     [ 'name', 'description' , 'tags','price','stock']
                 );
                 $values = Settings::find('id = 1');
+                if($values){
                 $eventsManager = $this->di->get('EventsManager');
                 $val = $eventsManager->fire('Handle:checkzip', $products, $values);
+                }
                 $success=$val->save();
               
 

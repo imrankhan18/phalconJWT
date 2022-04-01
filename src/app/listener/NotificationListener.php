@@ -17,7 +17,7 @@ class NotificationListener extends Injectable
 
         
         $aclfile = APP_PATH . '/security/acl.cache';
-        $controller = ($this->router->getControllerName());
+        $controller = $this->router->getControllerName();
         $action = $this->router->getActionName();
         $bearer = $application->request->get('bearer');
         if ($bearer) {
@@ -37,7 +37,7 @@ class NotificationListener extends Injectable
                     die;
                 }
                 if ($claims['sub'] == 'admin') {
-                    $action = ($this->router->getActionName());
+                    $action = $this->router->getActionName();
                 }
 
                 if (true !== $acl->isAllowed($claims['sub'], "$controller", "$action")) {

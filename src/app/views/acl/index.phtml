@@ -1,0 +1,41 @@
+<?php
+echo $this->tag->form(['style'=>"text-align:center",'acl/acl']); ?>
+<?php
+echo "<h1 style='text-align:center;'>Permissions</h1>";
+
+echo $this->tag->select(
+    [
+        "dropdown",
+        Roles::find(),
+        "using" => ["roles","roles"],
+    ]
+);
+$components=Components::find();
+$actions=Actions::find();
+?>
+<p>
+ <label for="compo"><b>Componets</b></label><br>
+
+<?php foreach($components as $comp){
+?>
+
+<input  type="checkbox" value="<?php echo $comp->components ?>" name="components[]" ><?php echo $comp->components ?></label>
+</p>
+<?php }?>
+<p>
+ <label for="action"><b>Action</b></label><br>
+
+<?php foreach($actions as $act){
+?>
+
+<input  type="checkbox" value="<?php echo $act->actions ?>" name="action[]" ><?php echo $act->actions ?></label>
+</p>
+
+<?php 
+}
+?>
+<p>
+        <?php echo $this->tag->submitButton(['class'=>'btn btn-primary',"Add Permission"]); ?>
+     
+    </p>
+</form>
