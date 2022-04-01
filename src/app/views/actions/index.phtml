@@ -1,0 +1,28 @@
+<h2 style="text-align:center; margin-top:100px; ">Add Actions</h2>
+<?php
+    // print_r($set);
+    // die();
+?>
+<?php echo $this->tag->form(['style'=>"text-align:center",'actions/index']); ?>
+
+    <p>
+        <label for="actions">Components</label>
+        <?php echo $this->tag->textField("actions"); ?>
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton(['class'=>'btn btn-primary',"Add Action"]); ?>
+     
+    </p>
+
+</form>
+<?php
+$act=Actions::find();
+$details='';
+foreach($act as $c)
+        {
+            $details.='<table><tr><th>'.$c->actions.'<th></tr>';
+        }
+        $details.='</table>';
+       echo $details;
+?>

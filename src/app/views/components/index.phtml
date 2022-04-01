@@ -1,0 +1,28 @@
+<h2 style="text-align:center; margin-top:100px; ">Add Components</h2>
+<?php
+    // print_r($set);
+    // die();
+?>
+<?php echo $this->tag->form(['style'=>"text-align:center",'components/compo']); ?>
+
+    <p>
+        <label for="compo">Components</label>
+        <?php echo $this->tag->textField("components"); ?>
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton(['class'=>'btn btn-primary',"Add Components"]); ?>
+     
+    </p>
+
+</form>
+<?php
+$compo=Components::find();
+$details='';
+foreach($compo as $c)
+        {
+            $details.='<table><tr><th>'.$c->components.'<th></tr>';
+        }
+        $details.='</table>';
+       echo $details;
+?>

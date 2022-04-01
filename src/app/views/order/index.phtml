@@ -1,0 +1,42 @@
+<h2>Add Order Details</h2>
+
+<?php echo $this->tag->form("order/register"); ?>
+
+    <p>
+        <label for="name">Customer Name</label>
+        <?php echo $this->tag->textField("name"); ?>
+    </p>
+
+    <p>
+        <label for="address">Customer Address</label>
+        <?php echo $this->tag->textArea("address"); ?>
+    </p>
+    <p>
+        <label for="zipcode">Zip Code</label>
+        <?php echo $this->tag->textField("zipcode"); ?>
+    </p>
+    <?php 
+    $p= Products::find();
+    
+    ?>
+    <p>Product(Dropdown)
+    
+    <?php echo $this->tag->select(
+    [
+        "dropdown",
+        Products::find(),
+        "using" => ["name","name"],
+    ]
+);?>
+    </p>
+    <p>
+        <label for="qauntity">Quantity</label>
+        <?php echo $this->tag->textField("quantity"); ?>
+        
+    </p>
+    <p>
+        <?php echo $this->tag->submitButton("Place Order"); ?>
+     
+    </p>
+  
+</form>

@@ -1,0 +1,28 @@
+<h2 style="text-align:center; margin-top:100px; ">Roles</h2>
+<?php
+    // print_r($set);
+    // die();
+?>
+<?php echo $this->tag->form(['style'=>"text-align:center","roles/roles"]); ?>
+
+    <p>
+        <label for="role">Roles</label>
+        <?php echo $this->tag->textField("roles"); ?>
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton(['class'=>'btn btn-primary',"Add Role"]); ?>
+     
+    </p>
+
+</form>
+<?php
+$roles=Roles::find();
+$details='';
+foreach($roles as $r)
+        {
+            $details.='<table><tr><th>'.$r->roles.'<th></tr>';
+        }
+        $details.='</table>';
+       echo $details;
+?>

@@ -1,0 +1,38 @@
+<h2>Settings</h2>
+<?php
+
+$settings= Settings::find();
+foreach($settings as $set)
+{
+    // print_r($set);
+    // die();
+?>
+<?php echo $this->tag->form("settings/add"); ?>
+
+    <p>
+        <label for="title">Title</label>
+        <select name="title">
+            <option name ="tag" id = "tag">Tag</option>
+            <option name ="withouttag" id = "withouttag">WithoutTag</option>
+        </select>
+    </p>
+
+    <p>
+        <label for="dprice">Default Price</label>
+        <?php echo $this->tag->textField(['placeholder'=>"$set->price","price"]); ?>
+    </p>
+    <p>
+        <label for="stock">Default Stock</label>
+        <?php echo $this->tag->textField(['placeholder'=>"$set->stock","stock"]); ?>
+    </p>
+    <p>
+        <label for="zipcode">Default Zipcode</label>
+        <?php echo $this->tag->textField(['placeholder'=>"$set->zipcode","zipcode"]); ?>
+    </p>
+    <p>
+        <?php echo $this->tag->submitButton(['class'=>'btn btn-primary',"Add Default"]); ?>
+     
+    </p>
+
+</form>
+<?php }

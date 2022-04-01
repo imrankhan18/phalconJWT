@@ -1,0 +1,53 @@
+<?php
+    echo "<h1 style='text-align:center;'>Order List</h1>";
+    if ($order->count() > 0 ) {
+        ?>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th>Order ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Tags</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="3">Total Orders: <?php echo $order->count(); ?></td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <?php foreach ($order as $orders )
+            {
+    ?>
+                
+                
+                <tr>
+                    <td><?php echo $orders->orderid; ?></td>
+                    <td><?php echo $orders->name; ?></td>
+                    <td><?php echo $orders->address; ?></td>
+                    <td><?php echo $orders->zipcode; ?></td>
+                    <td><?php echo $orders->quantity; ?></td>
+                    <td><?php echo $orders->dropdown; ?></td>
+                    <td><?php //echo $this->tag->linkTo([
+                            //'edit/edit/'.$user->id,
+                            //'Edit', 'class' => 'btn btn-primary' ]);?>
+                    <?php echo $this->tag->linkTo([
+                            'index/deleteOrder/'.$orders->orderid,
+                            'Delete', 'class' => 'btn btn-danger' ]);?></td>
+    
+                </tr>
+            <?php
+    } 
+}
+echo $this->tag->linkTo([
+    'index',
+    'Show Products!'
+]);
+ ?>
+            </tbody>
+        </table>
+        <?php
