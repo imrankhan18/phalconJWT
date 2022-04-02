@@ -80,7 +80,7 @@ $eventsManager->attach(
     'application:beforeHandleRequest',
     new \App\Listener\NotificationListener()
 );
-// $application->setEventsManager($eventsManager);
+$application->setEventsManager($eventsManager);
 $container->set(
     'EventsManager',
     $eventsManager
