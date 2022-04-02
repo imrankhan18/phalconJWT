@@ -80,12 +80,12 @@ $eventsManager->attach(
     'application:beforeHandleRequest',
     new \App\Listener\NotificationListener()
 );
-$application->setEventsManager($eventsManager);
+// $application->setEventsManager($eventsManager);
 $container->set(
     'EventsManager',
     $eventsManager
 );
-// $eventsManager->fire("event:default", new \App\Handle\Handle );
+$eventsManager->fire("event:default", new \App\Handle\Handle );
 
 
 

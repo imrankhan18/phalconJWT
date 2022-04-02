@@ -11,15 +11,29 @@ class RolesController extends Controller{
     {
         
     }
-    public function rolesAction()
+    public function registerAction()
     {
         $roles= new Roles();
         $roles->assign(
             $this->request->getPost(),
             ['roles']
         );
-        $roles->save();
-        $this->response->redirect('roles');
+        $success=$roles->save();
+        // $this->response->redirect('roles');
+        if ($success) {
+            $this->view->message = "Added succesfully";
+        } else {
+            $this->view->message = "Not Added succesfully due to following reason: <br>".implode("<br>", $roles->getMessages());
+            $message = implode(" & ", $roles->getMessages());
+            $adapter = new Stream('../app/logs/roles.log');
+            $logger = new Logger(
+                'messages',
+                [
+                    'main'=>$adapter,
+                ]
+            );
+                $logger->error($message);
+        }
         
         
     }
