@@ -22,7 +22,7 @@ class AclController extends Controller
     }
     public function createTokenAction()
     {
-       
+       $userd=$_POST;
         $signup = new Signup();
         $signup->assign(
             $this->request->getPost(),
@@ -36,7 +36,7 @@ class AclController extends Controller
     public function aclAction()
     {
 
-
+        
        
         $aclfile = APP_PATH . '/security/acl.cache';
         if (true !== is_file($aclfile)) {

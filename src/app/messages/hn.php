@@ -13,5 +13,8 @@ $messages = [
     'Stock' => 'भंडार',
     'Action' => 'कार्य',
     'Total Products : ' => 'कुल उत्पाद :',
-    'Select Language' => 'भाषा चुने'
+    'Select Language' => 'भाषा चुने',
+    'ID'=>'पहचान',
+    'Email'=>'ईमेल',
+    'Password'=>'पासवर्ड'
 ];

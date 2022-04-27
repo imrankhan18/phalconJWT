@@ -13,5 +13,9 @@ $messages = [
     'Stock' => 'Stock',
     'Action' => 'Action',
     'Total Products : ' => 'Total Products :',
-    'Select Language '=> 'Select Language'
+    'Select Language '=> 'Select Language',
+    'ID'=>'ID',
+    'Email'=>'Email',
+    'Password'=>'Password'
+
 ];

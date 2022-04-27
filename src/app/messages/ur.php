@@ -14,4 +14,7 @@ $messages = [
     'Action' => 'عمل',
     'Total Products : ' => 'کل مصنوعات :',
     'Select Language' => 'زبان منتخب کریں۔',
+    'ID'=>'شناخت',
+    'Email'=>'ای میل',
+    'Password'=>'پاس ورڈ'
 ];

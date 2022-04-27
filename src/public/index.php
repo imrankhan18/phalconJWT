@@ -1,9 +1,5 @@
 <?php
 require_once'../vendor/autoload.php';
-// print_r(apache_get_modules());
-// echo "<pre>"; print_r($_SERVER); die;
-// $_SERVER["REQUEST_URI"] = str_replace("/phalt/","/",$_SERVER["REQUEST_URI"]);
-// $_GET["_url"] = "/";
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
@@ -13,13 +9,16 @@ use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
 use Phalcon\Di;
 use Phalcon\Escaper;
-// use Phalcon\Session;
-// use Phalcon\Http\Response\Cookies;
+use Phalcon\Session;
+use Phalcon\Http\Response\Cookies;
 use Phalcon\Logger;
 use Phalcon\Events\Manager;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Logger\Adapter\Stream;
 use App\Locale\Locale;
+use Phalcon\Cache;
+use Phalcon\Cache\AdapterFactory;
+use Phalcon\Storage\SerializerFactory;
 
 $config = new Config([]);
 
@@ -89,38 +88,62 @@ $eventsManager->fire("event:default", new \App\Handle\Handle );
 
 
 
-// $container->set(
-//     "session",
-//     function()
-//     {
-//         $session = new Manager();
-//         $files = new Stream(
-//             [
-//                 'savePath' => '/tmp',
-//             ]
-//         );
-//         $session->setAdapter($files);
-//         $session->start();
+$container->set(
+    "session",
+    function()
+    {
+        $session = new Manager();
+        $files = new Stream(
+            [
+                'savePath' => '/tmp',
+            ]
+        );
+        $session->setAdapter($files);
+        $session->start();
 
-//         return $session;
+        return $session;
 
 
-//     }
-// );
+    }
+);
 
-// $container->set(
-//     "cookies",
-//     function()
-//     {
+$container->set(
+    "cookies",
+    function()
+    {
         
-//         $cookies=new Cookies();
-//         $cookies->useEncryption(false);
-//         return $cookies;
-//     }
-// );
+        $cookies=new Cookies();
+        $cookies->useEncryption(false);
+        return $cookies;
+    }
+);
 
-// 
-// $container = new FactoryDefault();
+$container->set(
+    'locale', new App\Locale\Locale
+);
+
+$container->set(
+    'locale', new App\Locale\Locale
+);
+$container->set(
+    'cache',
+    function() {
+        $serializerFactory = new SerializerFactory();
+        $adapterFactory    = new AdapterFactory($serializerFactory);
+        
+        $options = [
+
+            'lifetime'          => 7200
+        ];
+        
+        $adapter = $adapterFactory->newInstance('apcu', $options);
+        
+        $cache = new Cache($adapter);
+        return $cache;
+    }
+);
+
+
 $container->set(
     'db',
     function() {
@@ -133,14 +156,14 @@ $container->set(
             ]
         );
 
-        // $eventsManager-> attach(
-        //     'db:afterQuery',
-        //     function ($event, $connection) use ($logger) {
-        //         $logger->info(
-        //             $connection->getSQLStatement()
-        //         );
-        //     }
-        // );
+        $eventsManager-> attach(
+            'db:afterQuery',
+            function ($event, $connection) use ($logger) {
+                $logger->info(
+                    $connection->getSQLStatement()
+                );
+            }
+        );
 
         $connection = new Mysql(
             [
@@ -157,11 +180,6 @@ $container->set(
     }
 );
 
-// 
-
-
-
-
 
 // $container->set(
 //     'db',
@@ -176,12 +194,6 @@ $container->set(
 //             );
 //         }
 // );
-
-
-
-
-
-// $container = new Di();
 
 $container->set(
     'escaper',
@@ -224,15 +236,6 @@ $container->set(
 
 $container->set('locale', (new Locale())->getTranslator());
 
-// $container->set(
-//     'mongo',
-//     function () {
-//         $mongo = new MongoClient();
-
-//         return $mongo->selectDB('phalt');
-//     },
-//     true
-// );
 try {
     // Handle the request
     $response = $application->handle(

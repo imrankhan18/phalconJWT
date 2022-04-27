@@ -14,5 +14,8 @@ $messages = [
     'Action' => 'action',
     'Total Products : ' => 'Produits totaux :',
     'Select Language'=> 'Choisir la langue',
-    'Select' =>'Sélectionner'
+    'Select' =>'Sélectionner',
+    'ID'=>'identité',
+    'Email'=>'e-mail',
+    'Password'=>'le mot de passe'
 ];
